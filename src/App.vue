@@ -74,6 +74,7 @@ const CheckForCommand = (results) => {
     }
   })
 }
+
 const ToggleMic = () => {
   if (!sr) {
     console.error('SpeechRecognition instance is not initialized.')
@@ -86,13 +87,30 @@ const ToggleMic = () => {
     sr.start()
   }
 }
+
+const clearTranscript = () => {
+  transcript.value = ''
+}
+
+const copyTranscript = () => {
+  navigator.clipboard.writeText(transcript.value)
+}
 </script>
 
 <template>
   <div class="app">
     <h1>VocalFlow</h1>
-    <button :class="{'mic-active': isRecording}" @click="ToggleMic">Record</button>
-    <textarea class="transcript" v-model="transcript" readonly></textarea>
+    <button :class="{'mic-active': isRecording}" @click="ToggleMic">
+      <i :class="{'fas fa-microphone': !isRecording, 'fas fa-microphone-alt-slash': isRecording}"></i>
+      <span>{{ isRecording ? 'Stop Recording' : 'Start Recording' }}</span>
+    </button>
+    <div class="textarea-wrapper">
+      <textarea class="transcript" v-model="transcript" readonly></textarea>
+      <div class="icons">
+        <i class="fas fa-copy" @click="copyTranscript"></i>
+        <i class="fas fa-times" @click="clearTranscript"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -114,15 +132,20 @@ body {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  display: grid;
 }
 
 h1 {
   margin-bottom: 20px;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
+  margin-left: 6px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -130,7 +153,12 @@ button {
   border-radius: 5px;
   background-color: #007bff;
   color: white;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button .fas {
+  margin-right: 8px;
+  font-size: 1.2rem;
 }
 
 button.mic-active {
@@ -139,24 +167,64 @@ button.mic-active {
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 button.mic-active:hover {
   background-color: #c82333;
 }
 
-.transcript {
+.textarea-wrapper {
+  position: relative;
   margin-top: 20px;
+}
+
+.transcript {
   width: 100%;
-  height: 200px;
+  height: 300px;
   padding: 10px;
   font-size: 18px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background: #fff;
+  background: #2b2b2b;
   resize: none;
   overflow: auto;
-  white-space: pre-wrap; /* Ensure white spaces and new lines are preserved */
-  color: #333; /* Ensure text color is visible */
+  white-space: pre-wrap;
+  color: #ffffff;
+  padding-right: 40px;
+}
+
+.icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icons .fas {
+  font-size: 1.2rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .transcript {
+    height: 200px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .icons .fas {
+    font-size: 1rem;
+  }
 }
 </style>
