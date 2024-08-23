@@ -19,23 +19,20 @@
    ```bash
    git clone https://github.com/Hashara13/VocalFlow-Voice-Recognition-App
 
-2. Navigate to the project directory:
+2. Navigate to the project directory
+    ```bash
+    cd VocalFlow-Voice-Recognition-App
 
- ```bash
- cd VocalFlow-Voice-Recognition-App
-
-3. Install the dependencies
-
- ```bash
- npm install
+3. Install the dependencies:
+    ```bash
+    npm install
 
 4. Start the development server
-
- ```bash
- npm run serve
+    ```bash
+    npm run serve
 
 ## Usage
 
     Access the app locally via http://localhost:8080/.
     Use the microphone button to start speaking and see real-time transcription.
-    Execute predefined commands to control various aspects of the app.
+    Execute predefined commands to control various aspects of the app
