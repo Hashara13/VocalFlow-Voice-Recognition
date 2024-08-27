@@ -33,7 +33,7 @@
 
 ## Usage
 
-    Access the app locally via http://localhost:8080/.
-    Access via https://vocalflow.vercel.app/
-    Use the microphone button to start speaking and see real-time transcription.
-    Execute predefined commands to control various aspects of the app.
+- Access the app locally via [http://localhost:8080/](http://localhost:8080/).
+- Access via [https://vocalflow.vercel.app/](https://vocalflow.vercel.app/).
+- Use the microphone button to start speaking and see real-time transcription.
+- Execute predefined commands to control various aspects of the app.
